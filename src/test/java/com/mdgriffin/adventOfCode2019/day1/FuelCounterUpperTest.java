@@ -34,4 +34,16 @@ public class FuelCounterUpperTest {
 		assertEquals(34241, FuelCounterUpper.calculateRequiredFuelForAllModules(exampleModuleMasses));
 		assertEquals(3415695, FuelCounterUpper.calculateRequiredFuelForAllModules(providedValues));
 	}
+
+	@Test
+	public void dfg() {
+		assertEquals(2, FuelCounterUpper.calculateRequireFuelRecurse(14));
+		assertEquals(966, FuelCounterUpper.calculateRequireFuelRecurse(1969));
+		assertEquals(50346, FuelCounterUpper.calculateRequireFuelRecurse(100756));
+	}
+
+	@Test
+	public void whenCalculatingRequiredFuelRecurseForAllModules_correctSum() {
+		assertEquals(5120654, FuelCounterUpper.calculateRequiredFuelRecurseForAllModules(providedValues));
+	}
 }
