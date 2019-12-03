@@ -2,19 +2,19 @@ package com.mdgriffin.adventOfCode2019.day2;
 
 public class ProgramAlarm {
 
-	public static int[] compute(int[] opCodes) {
-		opCodesLoop: for (int i = 0; i < opCodes.length; i += 4) {
-			int currentOpCode = opCodes[i];
-			int firstArgPos = opCodes[i + 1];
-			int secondArgPos = opCodes[i + 2];
-			int outputPos = opCodes[i + 3];
+	public static int[] compute(int[] memory) {
+		opCodesLoop: for (int i = 0; i < memory.length; i += 4) {
+			int currentOpCode = memory[i];
+			int firstArgAddress = memory[i + 1];
+			int secondArgAddress = memory[i + 2];
+			int outputAddress = memory[i + 3];
 
 			switch (Operation.getOperationByOpCode(currentOpCode)) {
 			case SUM:
-				opCodes[outputPos] = opCodes[firstArgPos] + opCodes[secondArgPos];
+				memory[outputAddress] = memory[firstArgAddress] + memory[secondArgAddress];
 				break;
 			case MULTIPLY:
-				opCodes[outputPos] = opCodes[firstArgPos] * opCodes[secondArgPos];
+				memory[outputAddress] = memory[firstArgAddress] * memory[secondArgAddress];
 				break;
 			case EXIT:
 				break opCodesLoop;
@@ -24,7 +24,7 @@ public class ProgramAlarm {
 
 		}
 
-		return opCodes;
+		return memory;
 	}
 
 	private enum Operation {
