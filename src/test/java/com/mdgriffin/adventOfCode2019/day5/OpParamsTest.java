@@ -22,6 +22,27 @@ public class OpParamsTest {
 		assertEquals(Mode.IMMEDIATE, op.arg3Mode);
 		assertEquals(Operation.EXIT, op.operation);
 
+		op = OpParams.getByInstruction(99);
+
+		assertEquals(Mode.POSITION, op.arg1Mode);
+		assertEquals(Mode.POSITION, op.arg2Mode);
+		assertEquals(Mode.POSITION, op.arg3Mode);
+		assertEquals(Operation.EXIT, op.operation);
+
+		op = OpParams.getByInstruction(1);
+
+		assertEquals(Mode.POSITION, op.arg1Mode);
+		assertEquals(Mode.POSITION, op.arg2Mode);
+		assertEquals(Mode.POSITION, op.arg3Mode);
+		assertEquals(Operation.SUM, op.operation);
+
+		op = OpParams.getByInstruction(104);
+
+		assertEquals(Mode.IMMEDIATE, op.arg1Mode);
+		assertEquals(Mode.POSITION, op.arg2Mode);
+		assertEquals(Mode.POSITION, op.arg3Mode);
+		assertEquals(Operation.OUTPUT, op.operation);
+
 	}
 
 }

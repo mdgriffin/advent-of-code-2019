@@ -1,8 +1,12 @@
 package com.mdgriffin.adventOfCode2019.day5;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 
-public class OpCoderTest {
+public class ThermalAdvisorSupervisorTerminalTest {
 
 	private static int[] providedInput = new int[] { 3, 225, 1, 225, 6, 6, 1100, 1, 238, 225, 104, 0, 1101, 81, 30, 225,
 			1102, 9, 63, 225, 1001, 92, 45, 224, 101, -83, 224, 224, 4, 224, 102, 8, 223, 223, 101, 2, 224, 224, 1, 224,
@@ -38,8 +42,8 @@ public class OpCoderTest {
 
 	@Test
 	public void compute() {
-
-		OpCoder.compute(providedInput);
+		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput);
+		assertTrue(outputs.contains(5346030));
 	}
 
 }
