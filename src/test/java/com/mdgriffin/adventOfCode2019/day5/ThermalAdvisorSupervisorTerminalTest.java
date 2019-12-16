@@ -42,8 +42,31 @@ public class ThermalAdvisorSupervisorTerminalTest {
 
 	@Test
 	public void compute() {
-		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput);
-		assertTrue(outputs.contains(5346030));
+//		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput, 1);
+//		assertTrue(outputs.contains(5346030));
+
+		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput, 5);
+		assertTrue(outputs.contains(513116));
+	}
+
+	@Test
+	public void computeWithNewOperations() {
+		int[] programMemory = new int[] { 3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0,
+				36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20,
+				1105, 1, 46, 98, 99 };
+
+		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, 7);
+		assertTrue(outputs.contains(999));
+
+		outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, 8);
+		assertTrue(outputs.contains(1000));
+
+		outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, 9);
+		assertTrue(outputs.contains(1001));
+
+		outputs = ThermalAdvisorSupervisorTerminal.compute(new int[] { 3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8 }, 8);
+
+		assertTrue(outputs.contains(1));
 	}
 
 }

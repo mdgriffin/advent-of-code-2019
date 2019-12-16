@@ -5,50 +5,61 @@ import java.util.List;
 
 public class ThermalAdvisorSupervisorTerminal {
 
-	public static List<Integer> compute(int[] memory) {
-		int insturctionPointer = 0;
+	public static List<Integer> compute(int[] memory, int inputValue) {
+		int instructionPointer = 0;
 		List<Integer> outputs = new ArrayList<Integer>();
 
-		while (insturctionPointer < memory.length) {
-			int currentInstruction = memory[insturctionPointer];
+		while (instructionPointer < memory.length) {
+			int currentInstruction = memory[instructionPointer];
 			OpParams op = OpParams.getByInstruction(currentInstruction);
-			int firstArg = 0;
-			int secondArg = 0;
-			int outputAddress = 0;
+			int args[] = new int[4];
 
-			if (op.operation.getNumArgs() == 4) {
-				firstArg = memory[insturctionPointer + 1];
-				secondArg = memory[insturctionPointer + 2];
-				outputAddress = memory[insturctionPointer + 3];
-			} else if (op.operation.getNumArgs() == 2) {
-				firstArg = memory[insturctionPointer + 1];
+			for (int i = 0; i < op.operation.getNumArgs() - 1; i++) {
+				args[i] = memory[instructionPointer + (i + 1)];
 			}
 
 			switch (op.operation) {
 			case SUM:
-				memory[outputAddress] = getArgValue(op.arg1Mode, memory, firstArg)
-						+ getArgValue(op.arg2Mode, memory, secondArg);
+				memory[args[2]] = getArgValue(op.arg1Mode, memory, args[0]) + getArgValue(op.arg2Mode, memory, args[1]);
 				break;
 			case MULTIPLY:
-				memory[outputAddress] = getArgValue(op.arg1Mode, memory, firstArg)
-						* getArgValue(op.arg2Mode, memory, secondArg);
+				memory[args[2]] = getArgValue(op.arg1Mode, memory, args[0]) * getArgValue(op.arg2Mode, memory, args[1]);
 				break;
 			case STORE:
-				// Hard coding 1 as input
-				memory[firstArg] = 1;
+				memory[args[0]] = inputValue;
 				break;
 			case OUTPUT:
-				System.out.println(getArgValue(op.arg1Mode, memory, firstArg));
-				outputs.add(getArgValue(op.arg1Mode, memory, firstArg));
+				System.out.println(getArgValue(op.arg1Mode, memory, args[0]));
+				outputs.add(getArgValue(op.arg1Mode, memory, args[0]));
 				break;
 			case EXIT:
-				insturctionPointer = memory.length;
+				instructionPointer = memory.length;
+				break;
+			case JUMP_IF_TRUE:
+				instructionPointer = getArgValue(op.arg1Mode, memory, args[0]) != 0
+						? getArgValue(op.arg2Mode, memory, args[1])
+						: instructionPointer + op.operation.getNumArgs();
+				continue;
+			case JUMP_IF_FALSE:
+				instructionPointer = getArgValue(op.arg1Mode, memory, args[0]) == 0
+						? getArgValue(op.arg2Mode, memory, args[1])
+						: instructionPointer + op.operation.getNumArgs();
+				continue;
+			case LESS_THAN:
+				memory[args[2]] = getArgValue(op.arg1Mode, memory, args[0]) < getArgValue(op.arg2Mode, memory, args[1])
+						? 1
+						: 0;
+				break;
+			case EQUALS:
+				memory[args[2]] = getArgValue(op.arg1Mode, memory, args[0]) == getArgValue(op.arg2Mode, memory, args[1])
+						? 1
+						: 0;
 				break;
 			default:
 				break;
 			}
 
-			insturctionPointer += op.operation.getNumArgs();
+			instructionPointer += op.operation.getNumArgs();
 		}
 
 		return outputs;
