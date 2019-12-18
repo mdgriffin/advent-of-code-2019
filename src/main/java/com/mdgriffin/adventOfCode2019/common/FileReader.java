@@ -21,8 +21,14 @@ public class FileReader {
 		return sb.toString();
 	}
 
-	public static int[] readCSVFile(String path) throws IOException {
-		return convertToInts(splitOnDelim(readFile(path), ","));
+	public static int[] readCSVFile(String path) {
+		try {
+			return convertToInts(splitOnDelim(readFile(path), ","));
+		} catch (IOException exc) {
+			System.out.println(exc.getMessage());
+		}
+
+		return new int[] {};
 	}
 
 	public static String[] splitOnDelim(String input, String delim) {

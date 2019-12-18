@@ -20,7 +20,7 @@ public class FileReaderTest {
 	}
 
 	@Test
-	public void readCSVFile() throws IOException {
+	public void readCSVFile() {
 		int[] csv = FileReader.readCSVFile(FILE_PATH);
 
 		assertEquals(9, csv.length);
