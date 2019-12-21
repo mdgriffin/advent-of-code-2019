@@ -4,12 +4,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CountOrbits {
+public class OrbitMap {
 	
-	public static int getNumOrbits (String orbitsDescriptors) {
-		Map<String, Planet> namedPlanets = new HashMap<String, Planet>();
+	private Map<String, Planet> namedPlanets = new HashMap<String, Planet>();
+	
+	public OrbitMap(String orbitsDescriptors) {
+		initializeNamedPlanets(orbitsDescriptors);
+	}
+	
+	private void initializeNamedPlanets(String orbitsDescriptors) {
 		String[] orbits = orbitsDescriptors.split("\\r?\\n");
-		int numOrbits = 0;
 		
 		Arrays.stream(orbits).forEach(orbit -> {
 			String[] orbitParts = orbit.split("\\)");
@@ -37,6 +41,10 @@ public class CountOrbits {
 			
 			orbittingPlanet.orbits = orbittedPlanet;
 		});
+	}
+	
+	public int getNumOrbits() {
+		int numOrbits = 0;
 		
 		for (String key : namedPlanets.keySet()) {
 			Planet currentPlanet = namedPlanets.get(key);
@@ -52,8 +60,6 @@ public class CountOrbits {
 		
 		return numOrbits;
 	}
-	
-	
 	
 	private static class Planet {
 		
