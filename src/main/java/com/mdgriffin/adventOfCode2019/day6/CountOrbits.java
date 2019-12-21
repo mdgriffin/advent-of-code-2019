@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class CountOrbits {
 	
-	
 	public static int getNumOrbits (String orbitsDescriptors) {
 		Map<String, Planet> namedPlanets = new HashMap<String, Planet>();
 		String[] orbits = orbitsDescriptors.split("\\r?\\n");

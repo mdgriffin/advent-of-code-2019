@@ -8,27 +8,27 @@ import java.util.Arrays;
 
 public class FileReader {
 
-	public static String readFile(String path) throws IOException {
-		InputStream inputStream = FileReader.class.getResourceAsStream(path);
-		BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+	public static String readFile(String path) {
 		StringBuilder sb = new StringBuilder();
-		String line = "";
 
-		while ((line = br.readLine()) != null) {
-			sb.append(line);
+		try {
+			InputStream inputStream = FileReader.class.getResourceAsStream(path);
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+			String line = "";
+			
+			while ((line = br.readLine()) != null) {
+				sb.append(line).append("\n");
+			}
+		} catch (IOException exc) {
+			System.out.println(exc.getMessage());
 		}
 
 		return sb.toString();
 	}
 
 	public static int[] readCSVFile(String path) {
-		try {
-			return convertToInts(splitOnDelim(readFile(path), ","));
-		} catch (IOException exc) {
-			System.out.println(exc.getMessage());
-		}
-
-		return new int[] {};
+		
+		return convertToInts(splitOnDelim(readFile(path).replaceAll("\\r?\\n", ""), ","));
 	}
 
 	public static String[] splitOnDelim(String input, String delim) {
