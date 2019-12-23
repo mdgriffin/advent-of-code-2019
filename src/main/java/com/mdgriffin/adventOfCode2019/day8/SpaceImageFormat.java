@@ -34,5 +34,43 @@ public class SpaceImageFormat {
 			layers[i] = currentLayer;
 		}
 	}
+	
+	public int getNumOfOccurencesInLayer(int layerIndex, int num) {
+		int numOccurences = 0;
+		
+		
+		for (int i = 0; i < layers[layerIndex].length; i++) {
+			if (layers[layerIndex][i] == num) {
+				numOccurences++;
+			}
+		}
+		
+		return numOccurences;
+	}
+	
+	
+	public int getIndexOfLayerWithFewestZeros () {
+		int lowestNumberOfZeros = Integer.MAX_VALUE;
+		int indexOfLowestNumberOfZeros = -1;
+		
+		for (int i = 0; i < layers.length; i++) {
+			int numZeroes = getNumOfOccurencesInLayer(i, 0);
+			
+			if (numZeroes < lowestNumberOfZeros) {
+				lowestNumberOfZeros = numZeroes;
+				indexOfLowestNumberOfZeros = i;
+			}
+		}
+		
+		return indexOfLowestNumberOfZeros;
+	}
+	
+	public int getNumberOfOneDigitsMultipliedByTwoDigitsOnLayerWithLowestNumberOfZeroes() {
+		int layerWithLowestNumbeOfZeroes = getIndexOfLayerWithFewestZeros();
+		int numOfOnes = getNumOfOccurencesInLayer(layerWithLowestNumbeOfZeroes,1);
+		int numOfTwos= getNumOfOccurencesInLayer(layerWithLowestNumbeOfZeroes,2);
+		
+		return numOfOnes * numOfTwos;
+	}
 
 }
