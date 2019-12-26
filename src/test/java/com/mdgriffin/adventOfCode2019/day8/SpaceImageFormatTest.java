@@ -3,6 +3,9 @@ package com.mdgriffin.adventOfCode2019.day8;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 import org.junit.Test;
 
 import com.mdgriffin.adventOfCode2019.common.FileReader;
@@ -35,6 +38,24 @@ public class SpaceImageFormatTest {
 		assertEquals(1441, image.getNumberOfOneDigitsMultipliedByTwoDigitsOnLayerWithLowestNumberOfZeroes());
 	}
 	
+	@Test
+	public void generateAndWriteImage() throws IOException {
+		BufferedImage imageToWrite = image.getImage();
+		
+		image.drawImageAsText();
+		SpaceImageFormat.writeImage(imageToWrite, "day-8.jpg⁩");
+	}
 	
+	@Test
+	public void getImagePixels() {
+		image = new SpaceImageFormat(2, 2, "0222112222120000");
+		int[] pixels = image.getImagePixels();
 
+		assertEquals(4, pixels.length);
+		
+		assertEquals(0, pixels[0]);
+		assertEquals(1, pixels[1]);
+		assertEquals(1, pixels[2]);
+		assertEquals(0, pixels[3]);
+	}
 }
