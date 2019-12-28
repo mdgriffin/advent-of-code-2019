@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.mdgriffin.adventOfCode2019.common.FileReader;
@@ -39,11 +40,20 @@ public class SpaceImageFormatTest {
 	}
 	
 	@Test
+	@Ignore
 	public void generateAndWriteImage() throws IOException {
 		BufferedImage imageToWrite = image.getImage();
 		
-		image.drawImageAsText();
 		SpaceImageFormat.writeImage(imageToWrite, "day-8.jpg⁩");
+	}
+	
+	@Test
+	public void drawImageAsText() throws IOException {
+		String imageAsText = image.drawImageAsText();
+		
+		assertTrue(imageAsText.length() > 0);
+		
+		System.out.println(imageAsText);
 	}
 	
 	@Test
