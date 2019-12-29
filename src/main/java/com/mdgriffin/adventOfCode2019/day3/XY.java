@@ -25,7 +25,7 @@ public class XY {
 	}
 
 	@Override
-	public final int hashCode() {
+	public int hashCode() {
 		return 17 * x * y;
 	}
 

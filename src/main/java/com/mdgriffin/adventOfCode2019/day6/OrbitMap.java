@@ -1,7 +1,10 @@
 package com.mdgriffin.adventOfCode2019.day6;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class OrbitMap {
@@ -40,6 +43,9 @@ public class OrbitMap {
 			
 			
 			orbittingPlanet.orbits = orbittedPlanet;
+			if (!orbittedPlanet.orbittedBy.contains(orbittingPlanet)) {
+				orbittedPlanet.orbittedBy.add(orbittingPlanet);
+			}
 		});
 	}
 	
@@ -61,14 +67,57 @@ public class OrbitMap {
 		return numOrbits;
 	}
 	
+	public int getInterPlanetDistance(String sourcePlanetName, String destinationPlanetName) {
+		LinkedList<Planet> queue = new LinkedList<Planet>();
+		List<Planet> visited = new ArrayList<Planet>();
+		Map<Planet, Integer> distance = new HashMap<Planet, Integer>();
+		Planet sourcePlanet = namedPlanets.get(sourcePlanetName);
+		
+		visited.add(sourcePlanet);
+		distance.put(sourcePlanet, 0);
+		queue.addLast(sourcePlanet);
+		
+		while(queue.size() > 0) {
+			Planet currentPlanet = queue.removeFirst();
+			
+			for (Planet adjacentPlanet : currentPlanet.getAdjacentPlanet()) {
+				if (!visited.contains(adjacentPlanet)) {
+					visited.add(adjacentPlanet);
+					
+					distance.put(adjacentPlanet, distance.get(currentPlanet) + 1);
+					queue.addLast(adjacentPlanet);
+					
+					if (adjacentPlanet.name.equals(destinationPlanetName)) {
+						return distance.get(currentPlanet);
+					}
+				}
+			}
+		}
+		
+		return -1;
+	}
+	
+	
 	private static class Planet {
 		
-		private Planet orbits;
+		public Planet orbits;
+		
+		public List<Planet> orbittedBy = new ArrayList<Planet>() ;
 		
 		private String name;
 		
 		public Planet(String name) {
 			this.name = name;
+		}
+		
+		public List<Planet> getAdjacentPlanet() {
+			List<Planet> merged = new ArrayList<Planet>(orbittedBy);
+			
+			if (orbits != null) {
+				merged.add(orbits);
+			}
+
+			return merged;
 		}
 		
 		@Override
