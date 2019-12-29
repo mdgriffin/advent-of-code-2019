@@ -2,6 +2,7 @@ package com.mdgriffin.adventOfCode2019.day5;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -42,10 +43,11 @@ public class ThermalAdvisorSupervisorTerminalTest {
 
 	@Test
 	public void compute() {
-//		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput, 1);
+//		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput, getLinkedListInitializedWithValue(1));
 //		assertTrue(outputs.contains(5346030));
 
-		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput, 5);
+		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput,
+				getLinkedListInitializedWithValue(5));
 		assertTrue(outputs.contains(513116));
 	}
 
@@ -55,18 +57,28 @@ public class ThermalAdvisorSupervisorTerminalTest {
 				36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20,
 				1105, 1, 46, 98, 99 };
 
-		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, 7);
+		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory,
+				getLinkedListInitializedWithValue(7));
 		assertTrue(outputs.contains(999));
 
-		outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, 8);
+		outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, getLinkedListInitializedWithValue(8));
 		assertTrue(outputs.contains(1000));
 
-		outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, 9);
+		outputs = ThermalAdvisorSupervisorTerminal.compute(programMemory, getLinkedListInitializedWithValue(9));
 		assertTrue(outputs.contains(1001));
 
-		outputs = ThermalAdvisorSupervisorTerminal.compute(new int[] { 3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8 }, 8);
+		outputs = ThermalAdvisorSupervisorTerminal.compute(new int[] { 3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8 },
+				getLinkedListInitializedWithValue(8));
 
 		assertTrue(outputs.contains(1));
+	}
+
+	private static LinkedList<Integer> getLinkedListInitializedWithValue(int valueForList) {
+		LinkedList<Integer> listToPopulate = new LinkedList<Integer>();
+
+		listToPopulate.add(valueForList);
+
+		return listToPopulate;
 	}
 
 }

@@ -1,13 +1,12 @@
 package com.mdgriffin.adventOfCode2019.day5;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class ThermalAdvisorSupervisorTerminal {
 
-	public static List<Integer> compute(int[] memory, int inputValue) {
+	public static LinkedList<Integer> compute(int[] memory, LinkedList<Integer> inputs) {
 		int instructionPointer = 0;
-		List<Integer> outputs = new ArrayList<Integer>();
+		LinkedList<Integer> outputs = new LinkedList<Integer>();
 
 		while (instructionPointer < memory.length) {
 			int currentInstruction = memory[instructionPointer];
@@ -26,11 +25,11 @@ public class ThermalAdvisorSupervisorTerminal {
 				memory[args[2]] = getArgValue(op.arg1Mode, memory, args[0]) * getArgValue(op.arg2Mode, memory, args[1]);
 				break;
 			case STORE:
-				memory[args[0]] = inputValue;
+				memory[args[0]] = inputs.removeFirst();
 				break;
 			case OUTPUT:
 				System.out.println(getArgValue(op.arg1Mode, memory, args[0]));
-				outputs.add(getArgValue(op.arg1Mode, memory, args[0]));
+				outputs.push(getArgValue(op.arg1Mode, memory, args[0]));
 				break;
 			case EXIT:
 				instructionPointer = memory.length;
