@@ -22,6 +22,9 @@ public class AmplifierTest {
 	private static final int[] SAMPLE_INPUT_3 = new int[] { 3, 31, 3, 32, 1002, 32, 10, 32, 1001, 31, -2, 31, 1007, 31,
 			0, 33, 1002, 33, 7, 33, 1, 33, 31, 31, 1, 32, 31, 31, 4, 31, 99, 0, 0, 0 };
 
+	private static final int[] FEEDBACK_INPUT_1 = new int[] { 3, 26, 1001, 26, -4, 26, 3, 27, 1002, 27, 2, 27, 1, 27,
+			26, 27, 4, 27, 1001, 28, -1, 28, 1005, 28, 6, 99, 0, 0, 5 };
+
 	@Test
 	public void providedInputsInitialized() {
 		assertEquals(515, PROVIDED_INPUT.length);
@@ -41,9 +44,9 @@ public class AmplifierTest {
 
 	@Test
 	public void getAmplifierOutputSignal() {
-		assertEquals(43210, Amplifier.getAmplifierOutputSignal(SAMPLE_INPUT_1, new Integer[] { 4, 3, 2, 1, 0 }));
-		assertEquals(54321, Amplifier.getAmplifierOutputSignal(SAMPLE_INPUT_2, new Integer[] { 0, 1, 2, 3, 4 }));
-		assertEquals(65210, Amplifier.getAmplifierOutputSignal(SAMPLE_INPUT_3, new Integer[] { 1, 0, 4, 3, 2 }));
+		assertEquals(43210, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_1, new Integer[] { 4, 3, 2, 1, 0 }));
+		assertEquals(54321, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_2, new Integer[] { 0, 1, 2, 3, 4 }));
+		assertEquals(65210, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_3, new Integer[] { 1, 0, 4, 3, 2 }));
 	}
 
 	@Test
@@ -65,6 +68,11 @@ public class AmplifierTest {
 		});
 
 		assertEquals(6, numPermutations.get());
+	}
+
+	@Test
+	public void getHighestFromFeedbackLoop() {
+		// FEEDBACK_INPUT_1;
 	}
 
 }

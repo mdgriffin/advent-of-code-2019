@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.mdgriffin.adventOfCode2019.day5.ThermalAdvisorSupervisorTerminal;
+import com.mdgriffin.adventOfCode2019.computer.IntCodeComputer;
 
 public class Amplifier {
 
@@ -14,10 +14,18 @@ public class Amplifier {
 		Integer[] phaseSettings = new Integer[] { 0, 1, 2, 3, 4 };
 
 		doForEachPermutation(phaseSettings.length, phaseSettings, (currentPhaseSettings) -> {
-			outputs.add(getAmplifierOutputSignal(memory, currentPhaseSettings));
+			outputs.add(getAmplifierOutputSignal(0, memory, currentPhaseSettings));
 		});
 
 		return outputs.stream().mapToInt(Integer::intValue).max().getAsInt();
+	}
+
+	public static int getHighestFromFeedbackLoop() {
+		Integer[] phaseSettings = new Integer[] { 5, 6, 7, 8, 9 };
+
+		// keep calling each
+
+		return 1;
 	}
 
 	public static void doForEachPermutation(int k, Integer[] arr, Consumer<Integer[]> consumer) {
@@ -41,14 +49,27 @@ public class Amplifier {
 		}
 	}
 
-	public static int getAmplifierOutputSignal(int[] memory, Integer[] phaseSettings) {
-		int output = 0;
+	public static int getAmplifierOutputSignal(int initialInput, int[] memory, Integer[] phaseSettings) {
+		int output = initialInput;
 
-		for (int i = 0; i < 5; i++) {
-			output = ThermalAdvisorSupervisorTerminal.compute(memory, getInputs(phaseSettings[i], output)).pop();
+		List<IntCodeComputer> amplifiers = getAmplifiers(memory, 5);
+
+		for (int i = 0; i < amplifiers.size(); i++) {
+			output = amplifiers.get(i).run(getInputs(phaseSettings[i], output)).pop();
 		}
 
 		return output;
+	}
+
+	private static List<IntCodeComputer> getAmplifiers(int[] memory, int numComputers) {
+		List<IntCodeComputer> intCodeComputers = new ArrayList<IntCodeComputer>();
+
+		for (int i = 0; i < numComputers; i++) {
+			intCodeComputers.add(new IntCodeComputer(memory));
+		}
+
+		return intCodeComputers;
+
 	}
 
 	public static LinkedList<Integer> getInputs(int... inputsToAdd) {
