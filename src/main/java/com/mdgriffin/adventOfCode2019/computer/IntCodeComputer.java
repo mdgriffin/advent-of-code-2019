@@ -85,6 +85,10 @@ public class IntCodeComputer {
 
 	}
 
+	public int[] getMemory() {
+		return memory;
+	}
+
 	public void addInput(int input) {
 		this.inputs.addLast(input);
 	}

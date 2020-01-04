@@ -9,7 +9,6 @@ public class ProgramAlarmTest {
 
 	@Test
 	public void whenComputing_withValidInvalid_outputSequenceCorrect() {
-
 		int[] opCodes = new int[] { 1, 9, 10, 3, 2, 3, 11, 0, 99, 30, 40, 50 };
 		int[] expected = new int[] { 3500, 9, 10, 70, 2, 3, 11, 0, 99, 30, 40, 50 };
 		int[] actual = ProgramAlarm.compute(opCodes);
@@ -35,13 +34,9 @@ public class ProgramAlarmTest {
 				providedInput[1] = a;
 				providedInput[2] = b;
 
-				try {
-					int[] actual = ProgramAlarm.compute(providedInput);
-					if (actual[0] == target) {
-						System.out.println("noun = " + a + " , verb = " + b + " = " + target);
-					}
-				} catch (Exception exc) {
-
+				int[] actual = ProgramAlarm.compute(providedInput);
+				if (actual[0] == target) {
+					System.out.println("noun = " + a + " , verb = " + b + " = " + target);
 				}
 			}
 		}

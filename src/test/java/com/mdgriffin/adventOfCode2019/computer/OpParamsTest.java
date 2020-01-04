@@ -1,4 +1,4 @@
-package com.mdgriffin.adventOfCode2019.day5;
+package com.mdgriffin.adventOfCode2019.computer;
 
 import static org.junit.Assert.assertEquals;
 

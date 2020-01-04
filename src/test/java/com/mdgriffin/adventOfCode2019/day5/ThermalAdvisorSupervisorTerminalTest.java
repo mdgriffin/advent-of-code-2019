@@ -43,9 +43,6 @@ public class ThermalAdvisorSupervisorTerminalTest {
 
 	@Test
 	public void compute() {
-//		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput, getLinkedListInitializedWithValue(1));
-//		assertTrue(outputs.contains(5346030));
-
 		List<Integer> outputs = ThermalAdvisorSupervisorTerminal.compute(providedInput,
 				getLinkedListInitializedWithValue(5));
 		assertTrue(outputs.contains(513116));

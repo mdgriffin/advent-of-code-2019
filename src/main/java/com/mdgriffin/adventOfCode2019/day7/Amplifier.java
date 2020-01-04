@@ -56,18 +56,6 @@ public class Amplifier {
 		return output;
 	}
 
-//	private static List<LinkedList<Integer>> getInputLists(Integer[] phaseSettings) {
-//		List<LinkedList<Integer>> inputLists = new ArrayList<LinkedList<Integer>>();
-//
-//		for (int i = 0; i < phaseSettings.length; i++) {
-//			LinkedList<Integer> lst = new LinkedList<Integer>();
-//			lst.addLast(phaseSettings[i]);
-//			inputLists.add(lst);
-//		}
-//
-//		return inputLists;
-//	}
-
 	private static boolean allRunning(List<IntCodeComputer> computers) {
 		return computers.stream().allMatch(computer -> computer.isRunning);
 	}
