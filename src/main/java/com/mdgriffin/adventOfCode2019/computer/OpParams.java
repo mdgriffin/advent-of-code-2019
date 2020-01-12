@@ -1,4 +1,4 @@
-package com.mdgriffin.adventOfCode2019.day5;
+package com.mdgriffin.adventOfCode2019.computer;
 
 public class OpParams {
 	public Mode arg1Mode = Mode.POSITION;

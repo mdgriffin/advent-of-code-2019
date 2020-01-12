@@ -21,17 +21,17 @@ public class FileReaderTest {
 
 	@Test
 	public void readCSVFile() {
-		int[] csv = FileReader.readCSVFile(FILE_PATH);
+		long[] csv = FileReader.readCSVFile(FILE_PATH);
 
 		assertEquals(9, csv.length);
 		assertEquals(1, csv[0]);
 	}
 
 	@Test
-	public void convertToInts() {
+	public void convertToLongs() {
 		String[] inputs = new String[] { "1", "2", "3", "4" };
 
-		int[] converted = FileReader.convertToInts(inputs);
+		long[] converted = FileReader.convertToLongs(inputs);
 
 		assertEquals(4, inputs.length);
 		assertEquals(1, converted[0]);
