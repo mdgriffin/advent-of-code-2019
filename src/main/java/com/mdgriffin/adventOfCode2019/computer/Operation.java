@@ -2,7 +2,7 @@ package com.mdgriffin.adventOfCode2019.computer;
 
 public enum Operation {
 	SUM(1, 4), MULTIPLY(2, 4), STORE(3, 2), OUTPUT(4, 2), JUMP_IF_TRUE(5, 3), JUMP_IF_FALSE(6, 3), LESS_THAN(7, 4),
-	EQUALS(8, 4), EXIT(99, 1), DO_NOTHING(0, 4);
+	EQUALS(8, 4), ADJUST_RELATIVE_BASE(9, 2), EXIT(99, 1), DO_NOTHING(0, 4);
 
 	private int opCode;
 	private int numArgs;
@@ -43,6 +43,9 @@ public enum Operation {
 			break;
 		case 8:
 			operation = EQUALS;
+			break;
+		case 9:
+			operation = ADJUST_RELATIVE_BASE;
 			break;
 		case 99:
 			operation = EXIT;

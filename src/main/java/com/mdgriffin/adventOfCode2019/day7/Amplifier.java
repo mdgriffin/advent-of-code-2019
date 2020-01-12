@@ -9,30 +9,30 @@ import com.mdgriffin.adventOfCode2019.computer.IntCodeComputer;
 
 public class Amplifier {
 
-	public static int getHighest(int[] memory) {
-		final List<Integer> outputs = new ArrayList<Integer>();
-		Integer[] phaseSettings = new Integer[] { 0, 1, 2, 3, 4 };
+	public static long getHighest(long[] memory) {
+		final List<Long> outputs = new ArrayList<Long>();
+		Long[] phaseSettings = new Long[] { 0l, 1l, 2l, 3l, 4l };
 
 		doForEachPermutation(phaseSettings.length, phaseSettings, (currentPhaseSettings) -> {
 			outputs.add(getAmplifierOutputSignal(0, memory, currentPhaseSettings));
 		});
 
-		return outputs.stream().mapToInt(Integer::intValue).max().getAsInt();
+		return outputs.stream().mapToLong(Long::longValue).max().getAsLong();
 	}
 
-	public static int getHighestIterative(int[] memory) {
-		final List<Integer> outputs = new ArrayList<Integer>();
-		Integer[] phaseSettings = new Integer[] { 5, 6, 7, 8, 9 };
+	public static long getHighestIterative(long[] memory) {
+		final List<Long> outputs = new ArrayList<Long>();
+		Long[] phaseSettings = new Long[] { 5l, 6l, 7l, 8l, 9l };
 
 		doForEachPermutation(phaseSettings.length, phaseSettings, (currentPhaseSettings) -> {
 			outputs.add(getAmplifierOutputSignalIterative(0, memory, currentPhaseSettings));
 		});
 
-		return outputs.stream().mapToInt(Integer::intValue).max().getAsInt();
+		return outputs.stream().mapToLong(Long::longValue).max().getAsLong();
 	}
 
-	public static int getAmplifierOutputSignalIterative(int initialInput, int[] memory, Integer[] phaseSettings) {
-		int output = initialInput;
+	public static long getAmplifierOutputSignalIterative(int initialInput, long[] memory, Long[] phaseSettings) {
+		long output = initialInput;
 		List<IntCodeComputer> amplifiers = getAmplifiers(memory, 5);
 		boolean firstRun = true;
 
@@ -44,7 +44,7 @@ public class Amplifier {
 
 				amplifiers.get(i).addInput(output);
 
-				LinkedList<Integer> outputs = amplifiers.get(i).runToNextOutput();
+				LinkedList<Long> outputs = amplifiers.get(i).runToNextOutput();
 
 				if (outputs.size() > 0) {
 					output = outputs.pop();
@@ -60,18 +60,18 @@ public class Amplifier {
 		return computers.stream().allMatch(computer -> computer.isRunning);
 	}
 
-	public static int getAmplifierOutputSignal(int initialInput, int[] memory, Integer[] phaseSettings) {
-		int output = initialInput;
+	public static long getAmplifierOutputSignal(int initialInput, long[] memory, Long[] longs) {
+		long output = initialInput;
 		List<IntCodeComputer> amplifiers = getAmplifiers(memory, 5);
 
 		for (int i = 0; i < amplifiers.size(); i++) {
-			output = amplifiers.get(i).run(getInputs(phaseSettings[i], output)).pop();
+			output = amplifiers.get(i).run(getInputs(longs[i], output)).pop();
 		}
 
 		return output;
 	}
 
-	private static List<IntCodeComputer> getAmplifiers(int[] memory, int numComputers) {
+	private static List<IntCodeComputer> getAmplifiers(long[] memory, int numComputers) {
 		List<IntCodeComputer> intCodeComputers = new ArrayList<IntCodeComputer>();
 
 		for (int i = 0; i < numComputers; i++) {
@@ -81,17 +81,17 @@ public class Amplifier {
 		return intCodeComputers;
 	}
 
-	public static LinkedList<Integer> getInputs(int... inputsToAdd) {
-		LinkedList<Integer> inputs = new LinkedList<Integer>();
+	public static LinkedList<Long> getInputs(long... inputsToAdd) {
+		LinkedList<Long> inputs = new LinkedList<Long>();
 
-		for (int input : inputsToAdd) {
+		for (long input : inputsToAdd) {
 			inputs.addLast(input);
 		}
 
 		return inputs;
 	}
 
-	public static void doForEachPermutation(int k, Integer[] arr, Consumer<Integer[]> consumer) {
+	public static void doForEachPermutation(int k, Long[] arr, Consumer<Long[]> consumer) {
 		if (k == 1) {
 			consumer.accept(arr);
 		} else {
@@ -99,11 +99,11 @@ public class Amplifier {
 				doForEachPermutation(k - 1, arr, consumer);
 
 				if (k % 2 == 0) {
-					int temp = arr[i];
+					long temp = arr[i];
 					arr[i] = arr[k - 1];
 					arr[k - 1] = temp;
 				} else {
-					int temp = arr[0];
+					long temp = arr[0];
 					arr[0] = arr[k - 1];
 					arr[k - 1] = temp;
 

@@ -6,7 +6,7 @@ import com.mdgriffin.adventOfCode2019.computer.IntCodeComputer;
 
 public class ThermalAdvisorSupervisorTerminal {
 
-	public static LinkedList<Integer> compute(int[] memory, LinkedList<Integer> inputs) {
+	public static LinkedList<Long> compute(long[] memory, LinkedList<Long> inputs) {
 		IntCodeComputer computer = new IntCodeComputer(memory);
 		return computer.run(inputs);
 	}

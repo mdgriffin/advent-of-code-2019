@@ -6,9 +6,9 @@ import com.mdgriffin.adventOfCode2019.computer.IntCodeComputer;
 
 public class ProgramAlarm {
 
-	public static int[] compute(int[] memory) {
+	public static long[] compute(long[] memory) {
 		IntCodeComputer computer = new IntCodeComputer(memory);
-		computer.run(new LinkedList<Integer>());
+		computer.run(new LinkedList<Long>());
 
 		return computer.getMemory();
 	}

@@ -15,7 +15,7 @@ public class FileReader {
 			InputStream inputStream = FileReader.class.getResourceAsStream(path);
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 			String line = "";
-			
+
 			while ((line = br.readLine()) != null) {
 				sb.append(line).append("\n");
 			}
@@ -26,17 +26,17 @@ public class FileReader {
 		return sb.toString();
 	}
 
-	public static int[] readCSVFile(String path) {
-		
-		return convertToInts(splitOnDelim(readFile(path).replaceAll("\\r?\\n", ""), ","));
+	public static long[] readCSVFile(String path) {
+
+		return convertToLongs(splitOnDelim(readFile(path).replaceAll("\\r?\\n", ""), ","));
 	}
 
 	public static String[] splitOnDelim(String input, String delim) {
 		return input.split(delim);
 	}
 
-	public static int[] convertToInts(String[] stringInts) {
-		return Arrays.stream(stringInts).mapToInt(Integer::parseInt).toArray();
+	public static long[] convertToLongs(String[] stringInts) {
+		return Arrays.stream(stringInts).mapToLong(Long::parseLong).toArray();
 	}
 
 }

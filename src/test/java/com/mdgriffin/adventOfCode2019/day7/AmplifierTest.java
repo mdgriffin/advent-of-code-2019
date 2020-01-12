@@ -11,21 +11,21 @@ import com.mdgriffin.adventOfCode2019.common.FileReader;
 
 public class AmplifierTest {
 
-	private static final int[] PROVIDED_INPUT = FileReader.readCSVFile("/test-input/day7.csv");
+	private static final long[] PROVIDED_INPUT = FileReader.readCSVFile("/test-input/day7.csv");
 
-	private static final int[] SAMPLE_INPUT_1 = new int[] { 3, 15, 3, 16, 1002, 16, 10, 16, 1, 16, 15, 15, 4, 15, 99, 0,
-			0 };
+	private static final long[] SAMPLE_INPUT_1 = new long[] { 3, 15, 3, 16, 1002, 16, 10, 16, 1, 16, 15, 15, 4, 15, 99,
+			0, 0 };
 
-	private static final int[] SAMPLE_INPUT_2 = new int[] { 3, 23, 3, 24, 1002, 24, 10, 24, 1002, 23, -1, 23, 101, 5,
+	private static final long[] SAMPLE_INPUT_2 = new long[] { 3, 23, 3, 24, 1002, 24, 10, 24, 1002, 23, -1, 23, 101, 5,
 			23, 23, 1, 24, 23, 23, 4, 23, 99, 0, 0 };
 
-	private static final int[] SAMPLE_INPUT_3 = new int[] { 3, 31, 3, 32, 1002, 32, 10, 32, 1001, 31, -2, 31, 1007, 31,
-			0, 33, 1002, 33, 7, 33, 1, 33, 31, 31, 1, 32, 31, 31, 4, 31, 99, 0, 0, 0 };
+	private static final long[] SAMPLE_INPUT_3 = new long[] { 3, 31, 3, 32, 1002, 32, 10, 32, 1001, 31, -2, 31, 1007,
+			31, 0, 33, 1002, 33, 7, 33, 1, 33, 31, 31, 1, 32, 31, 31, 4, 31, 99, 0, 0, 0 };
 
-	private static final int[] FEEDBACK_INPUT_1 = new int[] { 3, 26, 1001, 26, -4, 26, 3, 27, 1002, 27, 2, 27, 1, 27,
+	private static final long[] FEEDBACK_INPUT_1 = new long[] { 3, 26, 1001, 26, -4, 26, 3, 27, 1002, 27, 2, 27, 1, 27,
 			26, 27, 4, 27, 1001, 28, -1, 28, 1005, 28, 6, 99, 0, 0, 5 };
 
-	private static final int[] FEEDBACK_INPUT_2 = new int[] { 3, 52, 1001, 52, -5, 52, 3, 53, 1, 52, 56, 54, 1007, 54,
+	private static final long[] FEEDBACK_INPUT_2 = new long[] { 3, 52, 1001, 52, -5, 52, 3, 53, 1, 52, 56, 54, 1007, 54,
 			5, 55, 1005, 55, 26, 1001, 54, -5, 54, 1105, 1, 12, 1, 53, 54, 53, 1008, 54, 0, 55, 1001, 55, 1, 55, 2, 53,
 			55, 53, 4, 53, 1001, 56, -1, 56, 1005, 56, 6, 99, 0, 0, 0, 0, 10 };
 
@@ -48,26 +48,26 @@ public class AmplifierTest {
 
 	@Test
 	public void getAmplifierOutputSignal() {
-		assertEquals(43210, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_1, new Integer[] { 4, 3, 2, 1, 0 }));
-		assertEquals(54321, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_2, new Integer[] { 0, 1, 2, 3, 4 }));
-		assertEquals(65210, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_3, new Integer[] { 1, 0, 4, 3, 2 }));
+		assertEquals(43210l, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_1, new Long[] { 4l, 3l, 2l, 1l, 0l }));
+		assertEquals(54321l, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_2, new Long[] { 0l, 1l, 2l, 3l, 4l }));
+		assertEquals(65210l, Amplifier.getAmplifierOutputSignal(0, SAMPLE_INPUT_3, new Long[] { 1l, 0l, 4l, 3l, 2l }));
 	}
 
 	@Test
 	public void whenGettingInputs_ordrCorrect() {
-		LinkedList<Integer> inputs = Amplifier.getInputs(1, 2, 3);
+		LinkedList<Long> inputs = Amplifier.getInputs(1, 2, 3);
 
 		assertEquals(3, inputs.size());
-		assertEquals(1, (int) inputs.removeFirst());
-		assertEquals(2, (int) inputs.removeFirst());
-		assertEquals(3, (int) inputs.removeFirst());
+		assertEquals(1l, (long) inputs.removeFirst());
+		assertEquals(2l, (long) inputs.removeFirst());
+		assertEquals(3l, (long) inputs.removeFirst());
 	}
 
 	@Test
 	public void generatePermutations() {
 		AtomicInteger numPermutations = new AtomicInteger();
 
-		Amplifier.doForEachPermutation(3, new Integer[] { 0, 1, 2 }, (a) -> {
+		Amplifier.doForEachPermutation(3, new Long[] { 0l, 1l, 2l }, (a) -> {
 			numPermutations.incrementAndGet();
 		});
 
@@ -88,10 +88,10 @@ public class AmplifierTest {
 	@Test
 	public void getAmplifierOutputSignalIterative() {
 		assertEquals(139629729,
-				Amplifier.getAmplifierOutputSignalIterative(0, FEEDBACK_INPUT_1, new Integer[] { 9, 8, 7, 6, 5 }));
+				Amplifier.getAmplifierOutputSignalIterative(0, FEEDBACK_INPUT_1, new Long[] { 9l, 8l, 7l, 6l, 5l }));
 
 		assertEquals(18216,
-				Amplifier.getAmplifierOutputSignalIterative(0, FEEDBACK_INPUT_2, new Integer[] { 9, 7, 8, 5, 6 }));
+				Amplifier.getAmplifierOutputSignalIterative(0, FEEDBACK_INPUT_2, new Long[] { 9l, 7l, 8l, 5l, 6l }));
 	}
 
 }
