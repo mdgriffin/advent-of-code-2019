@@ -29,6 +29,14 @@ public class SensorBoostTest {
 	}
 
 	@Test
+	public void runBoosters_withProvidedInput_forPart2() {
+		List<Long> output = SensorBoost.runBoosters(PROVIDED_INPUT, Arrays.asList(2l));
+
+		assertEquals(1, output.size());
+		assertEquals(80379l, (long) output.get(0));
+	}
+
+	@Test
 	public void runBoosters_withExampleInput4() {
 		List<Long> output = SensorBoost.runBoosters(new long[] { 109, -1, 4, 1, 99 }, Arrays.asList());
 
