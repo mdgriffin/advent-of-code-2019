@@ -1,30 +1,31 @@
 package com.mdgriffin.adventOfCode2019.day10;
 
-import com.mdgriffin.adventOfCode2019.day3.XY;
-
-public class MapPosition extends XY {
+public class MapPosition {
 	
+	double x;
+	double y;
 	boolean isAsteroid;
 	int numVisibleAsteroids;
 
-	public MapPosition(int x, int y) {
-		super(x, y);
+	public MapPosition(double x, double y) {
+		this.x = x;
+		this.y = y;
 	}
 	
-	public MapPosition(int x, int y, boolean isAsteroid) {
-		super(x, y);
+	public MapPosition(double x, double y, boolean isAsteroid) {
+		this.x = x;
+		this.y = y;
 		this.isAsteroid = isAsteroid;
 	}
 	
 	@Override
 	public String toString() {
-		return (isAsteroid? "#," : ".,") + super.toString();
+		return (isAsteroid? "#," : ".,") + this.x + "," + this.y;
 	}
 	
-	// TODO: Probably not necessary
 	@Override
 	public int hashCode() {
-		return 17 * x * y;// * numVisibleAsteroids;
+		return (int) (17 * x * y);// * numVisibleAsteroids;
 	}
 	
 	@Override
@@ -41,7 +42,5 @@ public class MapPosition extends XY {
 
 		return this.x == otherMapPosition.x && this.y == otherMapPosition.y;
 	}
-
-
-
+	
 }
