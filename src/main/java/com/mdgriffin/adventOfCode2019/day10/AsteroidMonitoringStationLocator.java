@@ -172,6 +172,19 @@ public class AsteroidMonitoringStationLocator {
 		
 		throw new IllegalArgumentException("Segment must be in range 0 to 7");
 	}
+	
+//	private enum Segment {
+//		topRight(rightTop), rightTop(rightBottom), rightBottom, bottomRight, bottomLeft, leftBottom, leftTop, topLeft;
+//		
+//		
+//		private Segment nextSegment;
+//		
+//		Segment (Segment nextSegment) {
+//			this.nextSegment = nextSegment;
+//		}
+//		
+//		
+//	}
 
 	public MapPosition getNextEdgePosition (int segment, double oppositeDistance, MapPosition currentPosition) {
 		if (segment == 0 || segment  == 3) {
