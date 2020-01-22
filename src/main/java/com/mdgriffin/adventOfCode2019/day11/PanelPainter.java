@@ -20,16 +20,15 @@ public class PanelPainter {
 	private int currentDirection = 0;
 	private boolean[][] panelWasPainted;
 	
-	
-	public PanelPainter(int width, int height, long[] memory) {
+	public PanelPainter(int width, int height, long[] memory, int startPosValue) {
 		this.width = width;
 		this.height = height;
 		this.memory = memory;
-		initializeMap();
 		currentPosition = new XY(this.height / 2, this.width  / 2);
+		initializeMap(startPosValue);
 	}
 	
-	private void initializeMap() {
+	private void initializeMap(int startPosValue) {
 		map = new int[this.height][this.width];
 		panelWasPainted = new boolean[this.height][this.width];
 		
@@ -38,6 +37,8 @@ public class PanelPainter {
 				map[y][x] = MAP_INITIAL_VALUE;
 			}
 		}
+		
+		map[currentPosition.y][currentPosition.x] = startPosValue;
 	}
 
 	public int countNumberOfPanelsPainted () {
@@ -68,6 +69,24 @@ public class PanelPainter {
 		}
 		
 		return getNumPanelsPained();
+	}
+	
+	
+	public String printRegistration () {
+		StringBuffer sb = new StringBuffer();
+		
+		for (int y = 0; y < this.height; y++) {
+			for (int x = 0; x < this.width; x++) {
+				if (this.map[y][x] == 1) {
+					sb.append("#");
+				} else {
+					sb.append(" ");
+				}
+			}
+			sb.append("\n");
+		}
+		
+		return sb.toString();
 	}
 	
 	private int getNumPanelsPained() {
